@@ -14,10 +14,10 @@ const allowCors = fn => async (req, res) => {
 }
 
 const handler = (req, res) => {
-  response.status(200).json({
-    body: request.body,
-    query: request.query,
-    cookies: request.cookies,
+  res.status(200).json({
+    body: req.body,
+    query: req.query,
+    cookies: req.cookies,
   });
 }
 
