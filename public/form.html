@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Post form to Nodejs without using JavaScript</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                console.log('DOM is ready...');
+            })
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Submitting a form via POST method to Nodejs without JavaScript</h1>
+            <p>When form is submitted via POST, the payload is in request's body and the browser uses a content-type of <strong>application/x-www-form-urlencoded</strong> in request header.</p>
+            <form method="POST" action="/api/form-parser">
+                <input type="text" name="username" placeholder="Enter your name"><br /><br />
+                <input type="text" name="age" placeholder="Enter your age"><br /><br />
+                <button>Submit</button>
+              </form>
+        </main>
+    </body>
+</html>

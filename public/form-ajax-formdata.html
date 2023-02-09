@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Post a form's data as FormData to Nodejs using XMLHttpRequest</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                console.log('DOM is ready...');
+
+                const form = document.querySelector('form');
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const http = new XMLHttpRequest();
+                    http.open(form.getAttribute('method'), form.getAttribute('action'));
+                    http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    http.onreadystatechange = function() {
+                        if (http.readyState == 4 && http.status == 200) {
+                            console.log(http.responseText);
+                        }
+                    }
+                    http.send(formData);
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Post a form's data as FormData to Nodejs using XMLHttpRequest</h1>
+            <p>When we post a form to server using XMLHttpRequest and FormData api even if we set content-type to application/x-www-form-urlencoded, browser will submit the request using multipart/form-data to server which you can verify by inspecting request's payload in browser's devtools Network tab.</p>
+            <form method="POST" action="/api/form-ajax-parser">
+              <input type="text" name="username" placeholder="Enter your name"><br /><br />
+              <input type="text" name="age" placeholder="Enter your age"><br /><br />
+              <button>Submit</button>
+            </form>
+            <p>Response is displayed in Console</p>
+        </main>
+    </body>
+</html>
