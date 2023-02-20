@@ -1,6 +1,6 @@
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    console.log('blahblah');
+    console.log('testing');
     console.log(req.body);
     return res.send(`Hello ${req.body.username}! (request body)`);
   } else {
