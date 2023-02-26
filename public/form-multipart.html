@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>form</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                console.log('DOM is ready...');
+            })
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Submitting a multipart form to Nodejs without JavaScript</h1>
+            <form action="/api/form-multipart-parser" enctype="multipart/form-data" method="POST">
+                <input type="text" name="username" placeholder="Enter your name"><br /><br>
+                <input type="file" name="upload"><br>
+                <button>Submit</button>
+              </form>
+        </main>
+    </body>
+</html>

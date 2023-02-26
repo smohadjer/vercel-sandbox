@@ -15,7 +15,7 @@
                     const formData = new FormData(form);
                     const http = new XMLHttpRequest();
                     http.open(form.getAttribute('method'), form.getAttribute('action'));
-                    http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    http.setRequestHeader('Content-Type', 'multipart/form-data');
                     http.onreadystatechange = function() {
                         if (http.readyState == 4 && http.status == 200) {
                             console.log(http.responseText);

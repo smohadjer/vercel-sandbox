@@ -1,7 +1,12 @@
-const express = require('express');
-const cors = require('cors');
+import formParser from './form-parser.js';
+import formAjaxParser from './form-ajax-parser.js';
+import formMultipartParser from './form-multipart-parser.js';
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+
+
 const app = express();
-const bodyParser = require('body-parser');
 
 app.use(cors({
   origin: '*'
@@ -17,22 +22,20 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
   res.json({
-      message: 'Hello World'
+      message: 'Send a POST request!'
   });
 });
 
 app.post('/api/form-parser', (req, res) => {
-  res.setHeader('Content-Type', 'text/plain')
-  res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
+  formParser(req, res);
 });
 
 app.post('/api/form-ajax-parser', (req, res) => {
-  const contentType = req.get('Content-Type');
-  console.log(contentType);
-  res.setHeader('Content-Type', 'text/plain')
-  res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
+  formAjaxParser(req, res);
+});
+
+app.post('/api/form-multipart-parser', (req, res) => {
+  formMultipartParser(req, res);
 });
 
 app.listen(2020, () => {

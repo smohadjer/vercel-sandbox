@@ -8,4 +8,12 @@ export default function handler(req, res) {
     res.end("Method not allowed. Send a POST request.");
     return;
   }
+
+  /*
+  const contentType = req.get('Content-Type');
+  console.log(contentType);
+  res.setHeader('Content-Type', 'text/plain')
+  res.write('you posted:\n')
+  res.end(JSON.stringify(req.body, null, 2))
+  */
 }
