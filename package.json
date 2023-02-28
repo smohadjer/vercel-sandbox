@@ -25,6 +25,8 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
-    "multiparty": "^4.2.3"
+    "multiparty": "^4.2.3",
+    "octokit": "^2.0.14",
+    "dotenv": "^16.0.3"
   }
 }
