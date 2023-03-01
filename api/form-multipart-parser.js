@@ -41,9 +41,11 @@ export default async (req, res) => {
                 }
             });
 
-            res.write('<p>Your images served from GitHub repo:</p><p><img src="https://raw.githubusercontent.com/smohadjer/s3/master/' + file.originalFilename + '" /></p>');
-            res.write('received upload: \n\n');
-            res.end(util.inspect({ fields: fields, files: files }));
+            res.write(`<p>Hello ${fields.username},</p>`);
+            res.write('<p>Your image is now stored in this <a href="https://github.com/smohadjer/s3/tree/master">GitHub repository</a>:</p><p><img src="https://raw.githubusercontent.com/smohadjer/s3/master/' + file.originalFilename + '" /></p>');
+            //res.write('received upload: \n\n');
+            //res.end(util.inspect({ fields: fields, files: files }));
+            res.end();
         });
         return;
     } else {

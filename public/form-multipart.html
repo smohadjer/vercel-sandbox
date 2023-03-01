@@ -16,7 +16,8 @@
             <h1>Submitting a multipart form to Nodejs without JavaScript</h1>
             <form action="/api/form-multipart-parser" enctype="multipart/form-data" method="POST">
                 <input type="text" name="username" placeholder="Enter your name"><br /><br>
-                <input type="file" name="upload"><br>
+                <label>Upload an image:</label><br />
+                <input type="file" name="upload" accept="image/png, image/gif, image/jpeg"><br><br>
                 <button>Submit</button>
               </form>
         </main>
