@@ -41,7 +41,7 @@ export default async (req, res) => {
                 }
             });
 
-            //res.write('<img src="' + path + '" />');
+            res.write('<p>Your images served from GitHub repo:</p><p><img src="https://raw.githubusercontent.com/smohadjer/s3/master/' + file.originalFilename + '" /></p>');
             res.write('received upload: \n\n');
             res.end(util.inspect({ fields: fields, files: files }));
         });
