@@ -10,6 +10,18 @@ const octokit = new Octokit({
   auth: process.env.Token
 });
 
+const makeid = function(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
 export default async (req, res) => {
     if (req.method === "POST") {
         let form = new multiparty.Form();
@@ -18,7 +30,10 @@ export default async (req, res) => {
             res.write(`<p>Hello ${fields.username},</p>`);
 
             let html = '';
+            const folder = makeid(8);
 
+            // read this post to understand why we need to use a classic for loop instead of forEach
+            // https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
             for (const file of files.upload) {
                 //console.log(file);
 
@@ -29,11 +44,10 @@ export default async (req, res) => {
 
                 const source = fs.readFileSync(file.path);
                 const sourceBase64 = source.toString('base64');
-
                 const response = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
                     owner: 'smohadjer',
                     repo: 's3',
-                    path: file.originalFilename,
+                    path: folder + '/' + file.originalFilename,
                     message: 'a new commit message',
                     committer: {
                       name: 'Monalisa Octocat',
@@ -48,7 +62,7 @@ export default async (req, res) => {
                 console.log(response.status);
                 console.log(file.originalFilename + ' was uploaded');
 
-                html += '<p><img src="https://raw.githubusercontent.com/smohadjer/s3/master/' + file.originalFilename + '" /></p>';
+                html += '<p><img src="https://raw.githubusercontent.com/smohadjer/s3/master/' + folder + '/' + file.originalFilename + '" /></p>';
             }
 
             res.write('<p>Your files are now stored in this <a href="https://github.com/smohadjer/s3/tree/master">GitHub repository</a>:</p>');
