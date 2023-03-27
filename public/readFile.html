@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Reading JSON from file</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        <h1>Reading JSON from file</h1>
+        <p id="test"></p>
+        <script>
+          fetch('api/staticdata')
+          .then((response) => response.json())
+          .then((json) => {
+            document.getElementById('test').innerHTML = json;
+          });
+        </script>
+    </body>
+</html>
