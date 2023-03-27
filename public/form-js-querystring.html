@@ -56,9 +56,11 @@
             const sendDataFetch = (api, method, data, callback) => {
                 fetch(api, {
                     method: method,
+                    /*
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
+                    */
                     body: data
                 })
                 .then(res => res.text())
@@ -73,6 +75,7 @@
         <main>
             <h1>Post a form's data as query string to Nodejs using XMLHttpRequest</h1>
             <p>When we post a form to server using XMLHttpRequest and FormData api even if we set content-type to application/x-www-form-urlencoded, browser will submit the request using multipart/form-data which causes server to fail when parsing the request body. To avoid this problem, we need to convert FormData to a query string before submission using the URLSearchParams api as explained in this <a href="https://stackoverflow.com/questions/42980645/easier-way-to-transform-formdata-into-query-string">post</a>.</p>
+            <p>When submitting post via Fetch API leave out the "Content-Type" header and let Fetch detect and specify the header itself.</p>
 
             <form id="ajax-form" method="POST" action="/api/form-parser-js">
                 <h2>Via XMLHttpRequest</h2>
