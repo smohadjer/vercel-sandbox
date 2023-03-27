@@ -1,9 +1,10 @@
-import formParser from './form-parser.js';
-import formAjaxParser from './form-ajax-parser.js';
-import formMultipartParser from './form-multipart-parser.js';
+import formParser from './api/form-parser.js';
+import formParserJS from './api/form-parser-js.js';
+import formMultipartParser from './api/form-multipart-parser.js';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import staticData from './api/staticdata.js';
 
 
 const app = express();
@@ -18,7 +19,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
-//app.use(bodyParser.json())
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
   res.json({
@@ -26,12 +27,16 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/api/staticdata', (req, res) => {
+  staticData(req, res);
+});
+
 app.post('/api/form-parser', (req, res) => {
   formParser(req, res);
 });
 
-app.post('/api/form-ajax-parser', (req, res) => {
-  formAjaxParser(req, res);
+app.post('/api/form-parser-js', (req, res) => {
+  formParserJS(req, res);
 });
 
 app.post('/api/form-multipart-parser', (req, res) => {

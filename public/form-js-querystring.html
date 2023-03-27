@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Posting form data to Nodejs using JavaScripScript</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            form {
+                background: #eee;
+                padding: 1em;
+                margin-right: 1em;
+                display: inline-block;
+                max-width: 400px;
+                vertical-align: top;
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                console.log('DOM is ready...');
+
+                const forms = document.querySelectorAll('form');
+
+                forms.forEach(form => {
+                    form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const data = new URLSearchParams(formData);
+                    const method = form.getAttribute('method');
+                    const api = form.getAttribute('action');
+                    const callback = (data) => {
+                        form.querySelector('.response').innerHTML = `<p>${data}</p>`;
+                    }
+
+                    if (form.getAttribute('id') === 'ajax-form') {
+                        sendDataAjax(api, method, data, callback);
+                    } else {
+                        sendDataFetch(api, method, data, callback);
+                    }
+                });
+                });
+            })
+
+            const sendDataAjax = (api, method, data, callback) => {
+                const http = new XMLHttpRequest();
+                http.open(method, api);
+                http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                http.onreadystatechange = function() {
+                    if (http.readyState == 4 && http.status == 200) {
+                       callback(http.responseText);
+                    }
+                }
+                http.send(data.toString());
+            };
+
+            const sendDataFetch = (api, method, data, callback) => {
+                fetch(api, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: data
+                })
+                .then(res => res.text())
+                .then(data => {
+                   callback(data);
+                })
+                .catch(error => console.log(error));
+            };
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Post a form's data as query string to Nodejs using XMLHttpRequest</h1>
+            <p>When we post a form to server using XMLHttpRequest and FormData api even if we set content-type to application/x-www-form-urlencoded, browser will submit the request using multipart/form-data which causes server to fail when parsing the request body. To avoid this problem, we need to convert FormData to a query string before submission using the URLSearchParams api as explained in this <a href="https://stackoverflow.com/questions/42980645/easier-way-to-transform-formdata-into-query-string">post</a>.</p>
+
+            <form id="ajax-form" method="POST" action="/api/form-parser-js">
+                <h2>Via XMLHttpRequest</h2>
+                <input type="text" name="username" placeholder="Enter your name"><br /><br />
+                <input type="text" name="age" placeholder="Enter your age"><br /><br />
+                <button>Submit</button>
+                <div class="response"></div>
+            </form>
+
+            <form id="fetch-form" method="POST" action="/api/form-parser-js">
+                <h2>Via Fetch API</h2>
+                <input type="text" name="username" placeholder="Enter your name"><br /><br />
+                <input type="text" name="age" placeholder="Enter your age"><br /><br />
+                <button>Submit</button>
+                <div class="response"></div>
+            </form>
+        </main>
+    </body>
+</html>

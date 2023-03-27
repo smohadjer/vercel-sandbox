@@ -2,7 +2,7 @@ export default function handler(req, res) {
   if (req.method === 'POST') {
     console.log('testing');
     console.log(req.body);
-    return res.send(`Hello ${req.body.username}! (request body)`);
+    return res.send(`Hello ${req.body.username}!`);
   } else {
     res.writeHead(405, { 'content-type': 'text/plain' });
     res.end("Method not allowed. Send a POST request.");
