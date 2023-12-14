@@ -8,7 +8,7 @@ export function getFileContent(filename) {
 };
 
 export default async (req, res) => {
-  const fileContents = getFileContent('public/json/data.json');
+  const fileContents = getFileContent('data.json');
   //Return the content of the data file in json format
   res.status(200).json(fileContents);
 }
