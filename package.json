@@ -25,8 +25,9 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "@vercel/edge": "^1.1.1",
+    "dotenv": "^16.0.3",
     "multiparty": "^4.2.3",
-    "octokit": "^2.0.14",
-    "dotenv": "^16.0.3"
+    "octokit": "^2.0.14"
   }
 }
