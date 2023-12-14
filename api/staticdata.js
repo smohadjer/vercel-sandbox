@@ -2,7 +2,8 @@ import path from 'path';
 import fs from 'fs';
 
 export function getFileContent(filePath) {
-  const absolutePath = path.join(process.cwd(), filePath);
+  const absolutePath = path.join(process.cwd(), 'public', filePath);
+  console.log(absolutePath);
   const fileContent =  fs.readFileSync(absolutePath, 'utf8');
   return fileContent;
 };
