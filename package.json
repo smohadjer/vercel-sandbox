@@ -21,13 +21,13 @@
   "devDependencies": {
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "nodemon": "^2.0.20"
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
   },
   "dependencies": {
-    "@vercel/edge": "^1.1.1",
-    "dotenv": "^16.0.3",
+    "@vercel/edge": "^1.2.1",
+    "dotenv": "^16.4.7",
     "multiparty": "^4.2.3",
-    "octokit": "^2.0.14"
+    "octokit": "^4.1.0"
   }
 }
